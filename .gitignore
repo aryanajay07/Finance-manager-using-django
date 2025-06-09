@@ -1,0 +1,45 @@
+/venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info
+*.whl
+*.dist-info
+*.log
+*.sqlite3  
+*.db
+*.db-journal
+*.DS_Store
+*.coverage
+*.mypy_cache
+*.pytest_cache
+*.tox
+*.vscode
+*.idea
+*.swp
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg
+*.egg-info
+*.whl
+*.dist-info
+
+# Ignore virtual environments
+venv/
+# Ignore log files
+*.log
+# Ignore SQLite database files
+*.sqlite3
+*.db
+*.db-journal
+# Ignore macOS specific files
+*.DS_Store
