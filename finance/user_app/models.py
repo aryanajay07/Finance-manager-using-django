@@ -21,7 +21,7 @@ class Expense(models.Model):
     def save(self, *args, **kwargs):
         if self.long_term:
             self.monthly_expense = self.monthly_expense_calculation()
-        super(Expenses, self).save(*args, **kwargs)
+        super(Expense, self).save(*args, **kwargs)
     def monthly_expense_calculation(self):
         if self.long_term:
             if self.interest_rate==0:

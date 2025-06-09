@@ -1,0 +1,68 @@
+body {
+    background: #f5f6fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.form-container {
+    background: #fff;
+    padding: 32px 28px;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    width: 350px;
+}
+
+.form h2 {
+    margin-bottom: 24px;
+    color: #333;
+}
+
+.form label {
+    font-weight: 500;
+    color: #555;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background: #fafbfc;
+    transition: border 0.2s;
+}
+
+.form input[type="text"]:focus,
+.form input[type="password"]:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}

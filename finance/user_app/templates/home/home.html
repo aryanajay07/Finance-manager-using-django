@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Expenses List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="home-container">
+        {% if user.is_authenticated %}
+            <h2>Welcome {{ user.username }}</h2>
+            <a href="{% url 'expenses' %}" class="btn">View Expenses</a>
+            <form action="{% url 'logout' %}" method="post" style="margin-top:18px;">
+                {% csrf_token %}
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        {% else %}
+            <h2>Welcome Guest</h2>
+            <div class="home-btns">
+                <a href="{% url 'register' %}" class="btn">Register</a>
+                <a href="{% url 'login' %}" class="btn">Login</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

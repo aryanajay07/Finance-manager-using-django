@@ -1,0 +1,111 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-container {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 32px;
+    box-shadow: 0 12px 40px 0 rgba(24, 90, 157, 0.18), 0 1.5px 6px 0 rgba(67, 206, 162, 0.10);
+    padding: 56px 40px 40px 40px;
+    max-width: 420px;
+    width: 92vw;
+    text-align: center;
+    margin: 40px auto;
+    transition: box-shadow 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-container::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #43cea2 0%, transparent 70%);
+    opacity: 0.18;
+    z-index: 0;
+}
+
+.home-container::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #185a9d 0%, transparent 70%);
+    opacity: 0.13;
+    z-index: 0;
+}
+
+.home-container h2 {
+    color: #185a9d;
+    font-size: 2.3rem;
+    font-weight: bold;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(67, 206, 162, 0.08);
+}
+
+.home-container a.btn,
+.home-container button.btn {
+    display: block;
+    width: 100%;
+    margin: 0 auto 18px auto;
+    background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    color: #fff;
+    border: none;
+    padding: 15px 0;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    box-shadow: 0 2px 12px rgba(24, 90, 157, 0.13);
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+
+.home-container a.btn:hover,
+.home-container button.btn:hover {
+    background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    box-shadow: 0 6px 24px rgba(24, 90, 157, 0.18);
+    transform: translateY(-2px) scale(1.03);
+}
+
+.home-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+}
+
+form {
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .home-container {
+        padding: 28px 8px 18px 8px;
+    }
+
+    .home-container h2 {
+        font-size: 1.3rem;
+    }
+}

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenses List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/expense_list.css' %}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/logo.webp' %}" alt="logo">
+        </div>
+        <div class="main">
+            <section class="graph">
+                <h2>Monthly Expenses Bar Chart</h2>
+                <div class="plotly-chart" id="expense-graph"></div>
+            </section>
+            <section class="expenses">
+                <h2>Expenses List</h2>
+                <div class="expenses-list">
+                    {% for year_month, expenses in expense_data.items %}
+                    <div class="month">
+                        <h3>Month: {{ year_month }}</h3>
+                        {% for expense in expenses %}
+                        <div class="exp_list">
+                            <div class="left">
+                                <h2>{{ expense.name }}</h2>
+                                {% if expense.long_term %}
+                                <span class="date">Date - From {{ expense.date }} To {{ expense.end_date }}</span>
+                                {% else %}
+                                <span class="date">Date - {{ expense.date }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="right">
+                                <h2>${{ expense.amount }}</h2>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+        <section class="lower">
+            <form class="exp-form" method="post">
+                <h2>Add Long Term Liability or One Time Expense</h2>
+                {% csrf_token %}
+                <div class="form-row">
+                    <label>{{ form.long_term.label_tag }}</label>
+                    {{ form.long_term }}
+                </div>
+                <div class="form-row">
+                    <label>{{ form.name.label_tag }}</label>
+                    {{ form.name }}
+                    <label>{{ form.amount.label_tag }}</label>
+                    {{ form.amount }}
+                </div>
+                <div class="form-row">
+                    <label>{{ form.date.label_tag }}</label>
+                    {{ form.date }}
+                    <label>{{ form.end_date.label_tag }}</label>
+                    {{ form.end_date }}
+                </div>
+                <div class="form-row">
+                    <label>{{ form.interest_rate.label_tag }}</label>
+                    {{ form.interest_rate }}
+                </div>
+                <div class="button-container">
+                    <button class="btn btn-success" type="submit">Add Liability</button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <script>
+        var graphData = {{ graph_data|safe }};
+        Plotly.newPlot('expense-graph', graphData.data, graphData.layout);
+
+        $(document).ready(function(){
+            var longTermCheckbox = $('#id_long_term');
+            var longTermFields = $('#id_interest_rate, #id_end_date');
+            longTermFields.hide();
+            longTermCheckbox.on('change', function() {
+                if (longTermCheckbox.is(':checked')) {
+                    longTermFields.show();
+                } else {
+                    longTermFields.hide();
+                }
+            });
+            // Show fields if already checked (for edit forms)
+            if (longTermCheckbox.is(':checked')) {
+                longTermFields.show();
+            }
+        });
+    </script>
+</body>
+</html>
