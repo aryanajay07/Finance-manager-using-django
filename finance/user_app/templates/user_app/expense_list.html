@@ -20,6 +20,11 @@
             </section>
             <section class="expenses">
                 <h2>Expenses List</h2>
+                {% if expense_data %}
+    <p>Expense data found!</p>
+{% else %}
+    <p>No data!</p>
+{% endif %}
                 <div class="expenses-list">
                     {% for year_month, expenses in expense_data.items %}
                     <div class="month">
@@ -75,7 +80,7 @@
         </section>
     </div>
     <script>
-        var graphData = {{ graph_data|safe }};
+        var graphData = JSON.parse('{{ graph_data|escapejs }}');
         Plotly.newPlot('expense-graph', graphData.data, graphData.layout);
 
         $(document).ready(function(){

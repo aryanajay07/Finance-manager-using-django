@@ -39,7 +39,8 @@ def generate_graph(data):
                       xaxis=dict(rangeslider=dict(visible=True)),paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)',font_color='rgba(0,0,0,1)' )
     fig.update_traces(marker_color='rgba(0, 123, 255, 0.6)', marker_line_color='rgba(0, 123, 255, 1)', marker_line_width=1.5)
     graph_json= fig.to_json()
-    return graph_json
+    # return graph_json
+    return fig.to_dict() # Convert to dictionary for JSON serialization
 
 class ExpenseListView(LoginRequiredMixin,FormView):
     template_name = 'user_app/expense_list.html'
@@ -59,7 +60,7 @@ class ExpenseListView(LoginRequiredMixin,FormView):
         )
         expense.save()
         account.expense_list.add(expense)
-
+        print("FORM DATA:", form.cleaned_data)
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):
@@ -85,15 +86,15 @@ class ExpenseListView(LoginRequiredMixin,FormView):
                                 'end_date': expense.end_date,
                             })
                         current_date=current_date +relativedelta(months=1)
-                    else:
-                        year_month = current_date.strftime('%Y-%m')
-                        if year_month not in expense_data_graph:
-                            expense_data_graph[year_month]=[]
-                        expense_data_graph[year_month].append({
-                                'name': expense.name,
-                                'amount': expense.amount,
-                                'date': expense.date,
-                            })
+                    # else:
+                    #     year_month = current_date.strftime('%Y-%m')
+                    #     if year_month not in expense_data_graph:
+                    #         expense_data_graph[year_month]=[]
+                    #     expense_data_graph[year_month].append({
+                    #             'name': expense.name,
+                    #             'amount': expense.amount,
+                    #             'date': expense.date,
+                    #         })
                         
 
         for account in accounts:
@@ -127,6 +128,7 @@ class ExpenseListView(LoginRequiredMixin,FormView):
         context['expense_data_graph'] = expense_data
         context['aggregated_data'] = aggregated_data
 
+        aggregated_data = sorted(aggregated_data, key=lambda x: x['year_month'])
         graph_data = {
             'months':[item['year_month'] for item in aggregated_data],
             'expenses':[item['expenses'] for item in aggregated_data]
